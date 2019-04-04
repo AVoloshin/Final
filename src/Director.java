@@ -41,4 +41,22 @@ public class Director implements Employee {
     public String getEmail(){
         return this.email;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Director)){
+            return false;
+        }
+        Director dir = (Director) obj;
+            return (dir.id == id&&dir.exp==exp&&dir.salary==salary&&dir.fio.equals(fio)&&dir.email.equals(email));
+    }
+    @Override
+    public String toString() {
+        return "'" + fio + '\'' +
+                "ID=" + id +
+                ", Дата рождения=" + birthDate +
+                ", Опыт работы=" + exp +
+                ", Заплата=" + salary +
+                ", e-mail='" + email +'\'';
+    }
 }

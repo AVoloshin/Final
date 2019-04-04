@@ -43,4 +43,23 @@ public class WhiteCollar implements Employee{
     public int getPhone(){
         return this.phone;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof WhiteCollar)){
+            return false;
+        }
+        WhiteCollar whiteCollar = (WhiteCollar) obj;
+        return (whiteCollar.id == id&&whiteCollar.exp==exp&&whiteCollar.salary==salary&&whiteCollar.fio.equals(fio)&&whiteCollar.phone==(phone));
+    }
+
+    @Override
+    public String toString() {
+        return "Сотрудник " +
+                fio + '\'' +
+                "ID=" + id +
+                ", Дата рождения=" + birthDate +
+                ", Опыт работы=" + exp +
+                ", Заплата=" + salary +
+                ", Телефон=" + phone;
+    }
 }

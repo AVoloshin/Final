@@ -45,5 +45,22 @@ public class Vice implements Employee {
     public String getRating(){
         return this.rating;
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Vice)){
+            return false;
+        }
+        Vice vice = (Vice) obj;
+        return (vice.id == id&&vice.exp==exp&&vice.salary==salary&&vice.fio.equals(fio)&&vice.phone==(phone)&&vice.rating.equals(rating));
+    }
+    @Override
+    public String toString() {
+        return "'" + fio + '\'' +
+                "ID=" + id +
+                ", Дата рождения=" + birthDate +
+                ", Опыт работы=" + exp +
+                ", Заплата=" + salary +
+                ", Телефон=" + phone +
+                ", Рейтинг='" + rating +'\'';
+    }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Department extends Staff {
     private int id;
@@ -6,9 +7,9 @@ public class Department extends Staff {
     private String spec;
     private Director director;
     private Vice vice;
-    private ArrayList<WhiteCollar> staff;
+    private WhiteCollarList staff;
 
-    public Department(int id, String name, String spec, Director director, Vice vice, ArrayList<WhiteCollar> staff) {
+    public Department(int id, String name, String spec, Director director, Vice vice, WhiteCollarList staff) {
         this.id = id;
         this.name = name;
         this.spec = spec;
@@ -16,7 +17,7 @@ public class Department extends Staff {
         this.vice = vice;
         this.staff = staff;
     }
-    public ArrayList getStaff() {
+    public WhiteCollarList getStaff() {
         return staff;
     }
 
@@ -47,5 +48,25 @@ public class Department extends Staff {
     }
     static public Director addEmployee(int id, String fio, int birthDate, int exp, int salary, String email) {
         return new Director(id, fio, birthDate, exp, salary, email);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Отдел"+" ID=" + id +", название: '" + name + '\'' +", назначение: '" + spec + '\'' +'\n'+"директор: " + director.toString() +'\n'+"заместитель: " + vice.toString() +'\n'+"штат: ");
+        for(int i=0; i<staff.getStaffList().size();i++){
+            stringBuilder.append(staff.getStaffList().get(i).toString()+'\n');
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Department)){
+            return false;
+        }
+        Department dep = (Department) obj;
+
+        return (dep.getName().equals(getName())&&dep.getSpec().equals(getSpec())&&dep.getDirector().equals(getDirector())&&dep.getVice().equals(getVice())&&dep.getStaff().equals(getStaff()));
     }
 }
