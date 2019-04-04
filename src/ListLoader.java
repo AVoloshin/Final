@@ -11,24 +11,41 @@ public class ListLoader {
 
     private static ArrayList<Department> webList;
     private static ArrayList<Department> localList;
-    private static ArrayList<Department> unionList;
+    private static ArrayList<Department> unionList =  new ArrayList<>();
+
+    public static ArrayList<Department> getWebList() {
+        return webList;
+    }
+
+    public static ArrayList<Department> getLocalList() {
+        return localList;
+    }
+
+    public static ArrayList<Department> getUnionList() {
+        return unionList;
+    }
 
     public ArrayList<Department> unionList(){
+
         unionList.addAll(webList); //добавляем в общий список список из веба
         for(Department dep: localList){ //добавляем в общий список список локальный сравнивая ID записей двух списков
             for(int i=0; i<webList.size(); i++){
                 if(dep.getId()==webList.get(i).getId()){
-
+                    if(!(dep.equals(webList.get(i)))){
+                        System.out.println("Какое поле выбрать?");
+                    }
                 }
+                unionList.add(dep);
+                System.out.println("Запись добавлена");
             }
         }
         return unionList;
     }
 
-    class getWebList extends Thread {
+    static class GetWebList extends Thread {
         public void run(){
             try {
-                URL url = new URL("https://vk.com/doc2026963_496287439");
+                URL url = new URL("https://vk.com/doc2026963_496514386");
                 HttpsURLConnection httpsURLConnection = (HttpsURLConnection)url.openConnection();
                 StringBuilder stringBuilder = new StringBuilder();
                 try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream())))
@@ -48,7 +65,7 @@ public class ListLoader {
             }
         }
     }
-    class getLocalList extends Thread {
+    static class GetLocalList extends Thread {
         public void run(){
             StringBuilder stringBuilder = new StringBuilder();
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader("json.txt"))) {
@@ -71,7 +88,7 @@ public class ListLoader {
     public void fileWrite (String string){
         System.out.println(string);
         try {
-            FileWriter file = new FileWriter("json.txt", false);
+            FileWriter file = new FileWriter("json1.txt", false);
             file.write(string);
             file.flush();
         } catch (IOException e) {

@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-
 public class WhiteCollar implements Employee{
     private int id;
     private String fio;
     private int birthDate;
     private int exp;
     private int salary;
-    private int phone;
+    private long phone;
 
     public WhiteCollar(int id, String fio, int birthDate, int exp, int salary, int phone) {
         this.id = id;
@@ -40,7 +38,7 @@ public class WhiteCollar implements Employee{
     public int getSalary() {
         return this.salary;
     }
-    public int getPhone(){
+    public long getPhone(){
         return this.phone;
     }
     @Override

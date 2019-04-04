@@ -4,7 +4,7 @@ public class Vice implements Employee {
     private int birthDate;
     private int exp;
     private int salary;
-    private int phone;
+    private long phone;
     private String rating;
 
     public Vice(int id, String fio, int birthDate, int exp, int salary, int phone, String rating) {
@@ -39,7 +39,7 @@ public class Vice implements Employee {
     public int getSalary() {
         return this.salary;
     }
-    public int getPhone(){
+    public long getPhone(){
         return this.phone;
     }
     public String getRating(){
