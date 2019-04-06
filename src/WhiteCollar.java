@@ -1,4 +1,6 @@
-public class WhiteCollar implements Employee{
+import java.util.ArrayList;
+
+public class WhiteCollar extends Staff implements Employee{
     private int id;
     private String fio;
     private int birthDate;

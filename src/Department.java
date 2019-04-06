@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Collections;
 
-public class Department extends Staff {
+public class Department {
     private int id;
     private String name;
     private String spec;
@@ -35,6 +33,10 @@ public class Department extends Staff {
 
     public Director getDirector() {
         return director;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
     }
 
     public Vice getVice() {

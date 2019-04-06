@@ -1,5 +1,5 @@
-public class Vice implements Employee {
-    private int id;
+public class Vice extends Staff implements Employee {
+    protected int id;
     private String fio;
     private int birthDate;
     private int exp;

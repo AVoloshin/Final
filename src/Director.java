@@ -1,4 +1,6 @@
-public class Director implements Employee {
+import com.google.gson.annotations.SerializedName;
+
+public class Director extends Staff implements Employee {
     private int id;
     private String fio;
     private int birthDate;

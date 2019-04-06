@@ -1,0 +1,110 @@
+[
+  {
+    "id": 10,
+    "name": "Отдел СНГ",
+    "spec": "Восточная Европа",
+    "director": {
+      "id": 1,
+      "fio": "Путин Владимир Владимирович",
+      "birthDate": 07101952,
+      "exp": 19,
+      "salary": 1000000,
+      "email": "vvp@russiafederation.ru"
+    },
+    "vice": {
+      "id": 11,
+      "fio": "Лукашенко Александр Григорьевич",
+      "birthDate": 30081954,
+      "exp": 24,
+      "salary": 500000,
+      "phone": 102,
+      "rating": "бацька"
+    },
+    "staff": {
+          "staffList": [
+            {
+        "id": 101,
+        "fio": "Чижиков ИА",
+        "birthDate": 15031996,
+        "exp": 3,
+        "salary": 1000,
+        "phone": 293334455
+      },
+      {
+        "id": 102,
+        "fio": "Пыжиков АИ",
+        "birthDate": 25091991,
+        "exp": 2,
+        "salary": 800,
+        "phone": 293214354
+      },
+      {
+        "id": 103,
+        "fio": "Нар Султан",
+        "birthDate": 19071998,
+        "exp": 1,
+        "salary": 500,
+        "phone": 291215391
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "name": "Звездные войны",
+    "spec": "Галактика",
+    "director": {
+      "id": 1,
+      "fio": "Дарт Вейдер",
+      "birthDate": 04051970,
+      "exp": 59,
+      "salary": 999999,
+      "email": "darthvader666@starwars.com"
+    },
+    "vice": {
+      "id": 22,
+      "fio": "Люк Скайуокер",
+      "birthDate": 05051970,
+      "exp": 59,
+      "salary": 555555,
+      "phone": 441234567,
+      "rating": "джедай"
+    },
+    "staff": {
+          "staffList": [
+      {
+        "id": 30,
+        "fio": "C3PO",
+        "birthDate": 101010,
+        "exp": 101,
+        "salary": 0,
+        "phone": 1111111
+      },
+      {
+        "id": 222,
+        "fio": "R2D2",
+        "birthDate": 010101,
+        "exp": 110,
+        "salary": 0,
+        "phone": 1010101
+      },
+      {
+        "id": 33,
+        "fio": "Вуки",
+        "birthDate": 06051970,
+        "exp": 50,
+        "salary": 1000,
+        "phone": 3333333
+      },
+      {
+        "id": 34,
+        "fio": "Хан Соло",
+        "birthDate": 07051970,
+        "exp": 50,
+        "salary": 2000,
+        "phone": 3433333
+        }
+      ]
+    }
+  }
+]

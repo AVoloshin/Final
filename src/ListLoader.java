@@ -6,12 +6,14 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListLoader {
 
     private static ArrayList<Department> webList;
     private static ArrayList<Department> localList;
-    private static ArrayList<Department> unionList =  new ArrayList<>();
+    private static ArrayList<Department> departments;
+    private static HashMap<Integer, Department> unionHashMap;
 
     public static ArrayList<Department> getWebList() {
         return webList;
@@ -21,31 +23,56 @@ public class ListLoader {
         return localList;
     }
 
-    public static ArrayList<Department> getUnionList() {
-        return unionList;
+    public static void setDepartments() {
+        ListLoader.departments = new ArrayList<>(unionHashMap.values());
     }
 
-    public ArrayList<Department> unionList(){
+    public static ArrayList<Department> getDepartments() {
+        return departments;
+    }
 
-        unionList.addAll(webList); //добавляем в общий список список из веба
-        for(Department dep: localList){ //добавляем в общий список список локальный сравнивая ID записей двух списков
-            for(int i=0; i<webList.size(); i++){
-                if(dep.getId()==webList.get(i).getId()){
-                    if(!(dep.equals(webList.get(i)))){
-                        System.out.println("Какое поле выбрать?");
-                    }
-                }
-                unionList.add(dep);
-                System.out.println("Запись добавлена");
+    public static void createMainList (){
+        ListLoader.GetWebList webList = new ListLoader.GetWebList();
+        ListLoader.GetLocalList fileList = new ListLoader.GetLocalList();
+        webList.run(); fileList.run();
+        try {
+            webList.join();
+            fileList.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ListLoader unionList = new ListLoader();
+        unionList.uniteLists();
+        ListLoader.setDepartments();
+    }
+
+    public void uniteLists (){
+        if (getWebList()!=null&&getLocalList()!=null) {
+            System.out.println("Объединяем файлы");
+            unionHashMap = new HashMap<>();
+            for (Department dep : webList) {
+                unionHashMap.put(dep.getId(), dep); //Добавляем вебсписок в hashmap
+            }
+            for (Department dep : localList) { //добавляем локальный список
+                if (unionHashMap.containsKey(dep.getId())) { //если есть запись с таким id
+                    if (unionHashMap.get(dep.getId()).equals(dep)) { //сравниваем объекты по этому ключу и перезаписываем, если одинаковые
+                        unionHashMap.put(dep.getId(), dep);
+                    } else System.out.println("Выберите какой объект сохранить");
+                    dep.toString();
+                    unionHashMap.get(dep.getId()).toString();
+                } else unionHashMap.put(dep.getId(), dep); //если id уникальный добавляем запись в hashmap
             }
         }
-        return unionList;
+    }
+
+    public static HashMap getUnionHashMap() {
+        return unionHashMap;
     }
 
     static class GetWebList extends Thread {
         public void run(){
             try {
-                URL url = new URL("https://vk.com/doc2026963_496514386");
+                URL url = new URL("https://vk.com/doc2026963_496631598");
                 HttpsURLConnection httpsURLConnection = (HttpsURLConnection)url.openConnection();
                 StringBuilder stringBuilder = new StringBuilder();
                 try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream())))
@@ -66,19 +93,28 @@ public class ListLoader {
         }
     }
     static class GetLocalList extends Thread {
-        public void run(){
+        public void run() {
             StringBuilder stringBuilder = new StringBuilder();
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader("json.txt"))) {
-                String s;
-                while ((s = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(s).append("\n");
+            File f = new File("json1.txt");
+            if(!(f.exists()) && !f.isDirectory()) {
+                try {
+                    throw new MyException("json1.txt");
+                } catch (MyException e) {
+                    e.printStackTrace();
                 }
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                localList = gson.fromJson(stringBuilder.toString(), new TypeToken<ArrayList<Department>>(){}.getType());
-                System.out.println("Список из файла загружен");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+                try (BufferedReader bufferedReader = new BufferedReader(new FileReader("json1.txt"))) {
+                    String s;
+                    while ((s = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(s).append("\n");
+                    }
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    localList = gson.fromJson(stringBuilder.toString(), new TypeToken<ArrayList<Department>>() {
+                    }.getType());
+                    System.out.println("Список из файла загружен");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 

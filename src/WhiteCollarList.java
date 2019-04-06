@@ -2,17 +2,28 @@ import java.util.ArrayList;
 
 public class WhiteCollarList {
 
-    private ArrayList staffList = new ArrayList();
-
-    public WhiteCollarList() {
-
-    }
+    private ArrayList<WhiteCollar> staffList = new ArrayList<>();
 
     public void addStaff(WhiteCollar whiteCollar){
-        staffList.add(whiteCollar);
+        this.staffList.add(whiteCollar);
     }
     public ArrayList getStaffList(){
-        return staffList;
+        return this.staffList;
+    }
+    public String getFio (int i){
+        return staffList.get(i).getFio();
+    }
+    public int getExp (int i){
+        return staffList.get(i).getExp();
+    }
+    public int getSalary (int i){
+        return staffList.get(i).getSalary();
+    }
+    public int getId (int i){
+        return staffList.get(i).getId();
+    }
+    public long getPhone (int i){
+        return staffList.get(i).getPhone();
     }
 
     @Override

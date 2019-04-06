@@ -1,7 +1,7 @@
 interface Employee {
-    public int getId();
-    public String getFio();
-    public int getBirthDate();
-    public int getExp();
-    public int getSalary();
+     int getId();
+    String getFio();
+     int getBirthDate();
+     int getExp();
+     int getSalary();
 }
